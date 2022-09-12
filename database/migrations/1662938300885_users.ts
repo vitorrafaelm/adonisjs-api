@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('type').notNullable()
 
       table.boolean('isDeleted').defaultTo(false).notNullable()
+      table.integer('id_creator').references('id')
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
