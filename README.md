@@ -6,4 +6,6 @@ PROJECT SETUP
 - RUN npm i  to install dependencies 
 - Run node ace serve --watch to run the adonis project
 
+NO DIRETORIO DO PROJETO HÁ UM DIAGRAMA ENTIDADE RELACIONAMENTO E UM ARQUIVO JSON COM AS ROTAS DO INSOMIA
+
 Obs.:: add your database configuration to the .env file so you can store data (use the .env.example)
