@@ -1,5 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  column,
+  HasMany,
+  hasMany,
+  HasOne,
+  hasOne,
+  ManyToMany,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
+import Course from './Course'
+import UserType from './UserType'
+import Classroom from './Classroom'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -9,6 +21,27 @@ export default class User extends BaseModel {
   public students: HasMany<typeof User>
 
   @column()
+  public creatorId?: number
+
+  @hasOne(() => UserType)
+  public type: HasOne<typeof UserType>
+
+  @column()
+  public typeId: number
+
+  @hasMany(() => Course)
+  public courses: HasMany<typeof Course>
+
+  @manyToMany(() => Classroom, {
+    localKey: 'id',
+    pivotTable: 'user_classrooms',
+    pivotRelatedForeignKey: 'classroom_id',
+    pivotForeignKey: 'user_id',
+    pivotTimestamps: true,
+  })
+  public classroom: ManyToMany<typeof Classroom>
+
+  @column()
   public name: string
 
   @column()
@@ -16,12 +49,6 @@ export default class User extends BaseModel {
 
   @column()
   public email: string
-
-  @column()
-  public type: 'STUDENT' | 'CONTENT_MAKER'
-
-  @column()
-  public idCreator?: number
 
   @column()
   public isDeleted: boolean

@@ -15,7 +15,7 @@ export default class IdentifyUserType {
 
       await next()
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error('You are not a content maker')
     }
   }
 }
